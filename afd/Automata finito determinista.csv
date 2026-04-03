@@ -1,0 +1,11 @@
+Estado,0,1
+A,B,C
+B,D,E
+C,F,G
+D,D,H
+E,F,I
+F,I,J
+G,F,G
+H,F,I
+I,I,I
+J,I,I
