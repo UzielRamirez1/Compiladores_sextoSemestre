@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.TextFlow?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mx.unam.controller.controller">
+   <children>
+      <Button fx:id="botonEvaluar" layoutX="272.0" layoutY="105.0" mnemonicParsing="false" onAction="#evaluarTodo" text="Evaluar" />
+      <Button fx:id="botonCargar" layoutX="253.0" layoutY="216.0" mnemonicParsing="false" onAction="#abrirArchivo" text="Buscar archivo" />
+      <TextArea fx:id="areaContenido" layoutX="28.0" layoutY="142.0" prefHeight="200.0" prefWidth="200.0" />
+      <TextFlow fx:id="areaResultado" layoutX="371.0" layoutY="142.0" prefHeight="200.0" prefWidth="200.0" />
+      <TextField fx:id="campoEntrada" layoutX="208.0" layoutY="50.0" prefHeight="26.0" prefWidth="182.0" promptText="Escribe una expresion ej: (3e+3)" />
+      <Label layoutX="258.0" layoutY="21.0" text="Entrada manual" />
+      <Label layoutX="70.0" layoutY="109.0" text="Contenido del archivo" />
+      <Label layoutX="420.0" layoutY="109.0" text="Entradas evaluadas" />
+   </children>
+</AnchorPane>
