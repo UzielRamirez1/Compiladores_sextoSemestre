@@ -3,8 +3,12 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml" fx:controller="fes.aragon.demo1.HelloController">
-   <Label text="AFD  PARA LA EXPRESION (0*1|1*)01" />
-   <TextField fx:id="inputField" promptText="Ingresa cadena" />
+   <Label text="AFD PARA LA EXPRESION (0*1|1*)01" />
+
+   <TextField fx:id="inputField" promptText="Ingresa cadena (opcional)" />
+
+   <Button text="Seleccionar archivo TXT" onAction="#onSelectFileClick" />
    <Button text="Analizar" onAction="#onAnalyzeClick" />
+
    <Label fx:id="resultLabel" />
 </VBox>
