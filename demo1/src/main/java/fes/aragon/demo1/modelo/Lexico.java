@@ -1,7 +1,5 @@
 package fes.aragon.demo1.modelo;
 
-import javax.swing.JOptionPane;
-
 public class Lexico {
 
     private int indice;
