@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.TextFlow?>
+
+<AnchorPane prefHeight="398.0" prefWidth="781.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="mx.unam.controlador">
+
+    <!-- Botón -->
+    <Button fx:id="botonAbrir" layoutX="325.0" layoutY="60.0" onAction="#abrirArchivo" text="Abrir archivo y validar" />
+
+    <!-- Etiquetas -->
+    <Label layoutX="141.0" layoutY="104.0" text="Contenido del archivo" />
+
+    <Label layoutX="573.0" layoutY="104.0" text="Resultados" />
+
+    <!-- Área archivo -->
+    <ScrollPane layoutX="41.0" layoutY="131.0" prefHeight="242.0" prefWidth="304.0">
+        <content>
+            <TextFlow fx:id="areaArchivo" />
+        </content>
+    </ScrollPane>
+
+    <!-- Área resultados -->
+    <ScrollPane layoutX="450.0" layoutY="131.0" prefHeight="242.0" prefWidth="304.0">
+        <content>
+            <TextFlow fx:id="areaResultado" />
+        </content>
+    </ScrollPane>
+
+</AnchorPane>
