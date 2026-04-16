@@ -2,40 +2,29 @@ package fes.aragon.demo1.modelo;
 
 import javax.swing.JOptionPane;
 
- public class Lexico {
+public class Lexico {
 
-    private int indice = 0;
-    private String cadena = "";
+    private int indice;
+    private String cadena;
     private final int error = -1;
     private final int aceptado = 1;
 
-    public static void main(String[] args) {
-
-        Lexico app = new Lexico();
-        app.cadena = JOptionPane.showInputDialog("Dame la cadena");
-        int valor = app.estado_A();
-
-        if (valor == app.aceptado) {
-            JOptionPane.showMessageDialog(null, "Cadena Valida");
-        } else {
-            JOptionPane.showMessageDialog(null, "Cadena Invalida");
-        }
+    public boolean analizar(String cadena) {
+        this.cadena = cadena + " "; // espacio para detectar fin
+        this.indice = 0;
+        int valor = estado_A();
+        return valor == aceptado;
     }
 
     private char siguienteCaracter() {
-        char caracter = ' ';
-
         if (indice < cadena.length()) {
-            caracter = cadena.charAt(indice);
-            indice++;
+            return cadena.charAt(indice++);
         }
-
-        return caracter;
+        return ' ';
     }
 
     private int estado_A() {
         char c = siguienteCaracter();
-
         switch (c) {
             case '0': return estado_B();
             case '1': return estado_C();
@@ -45,7 +34,6 @@ import javax.swing.JOptionPane;
 
     private int estado_B() {
         char c = siguienteCaracter();
-
         switch (c) {
             case '0': return estado_D();
             case '1': return estado_E();
@@ -55,7 +43,6 @@ import javax.swing.JOptionPane;
 
     private int estado_C() {
         char c = siguienteCaracter();
-
         switch (c) {
             case '0': return estado_F();
             case '1': return estado_G();
@@ -65,7 +52,6 @@ import javax.swing.JOptionPane;
 
     private int estado_D() {
         char c = siguienteCaracter();
-
         switch (c) {
             case '0': return estado_D();
             case '1': return estado_H();
@@ -75,7 +61,6 @@ import javax.swing.JOptionPane;
 
     private int estado_E() {
         char c = siguienteCaracter();
-
         switch (c) {
             case '0': return estado_F();
             case '1': return estado_I();
@@ -83,48 +68,50 @@ import javax.swing.JOptionPane;
             default: return error;
         }
     }
-     private int estado_F() {
-         char c = siguienteCaracter();
 
-         switch (c) {
-             case '0': return estado_I();
-             case '1': return estado_J();
-             default: return error;
-         }
-     }
-     private int estado_G() {
-         char c = siguienteCaracter();
+    private int estado_F() {
+        char c = siguienteCaracter();
+        switch (c) {
+            case '0': return estado_I();
+            case '1': return estado_J();
+            default: return error;
+        }
+    }
 
-         switch (c) {
-             case '0': return estado_F();
-             case '1': return estado_G();
-             default: return error;
-         }
-     }
-     private int estado_H() {
-         char c = siguienteCaracter();
+    private int estado_G() {
+        char c = siguienteCaracter();
+        switch (c) {
+            case '0': return estado_F();
+            case '1': return estado_G();
+            default: return error;
+        }
+    }
 
-         switch (c) {
-             case '0': return estado_F();
-             case '1': return estado_I();
-             default: return error;
-         }
-     }
-     private int estado_I() {
-         char c = siguienteCaracter();
+    private int estado_H() {
+        char c = siguienteCaracter();
+        switch (c) {
+            case '0': return estado_F();
+            case '1': return estado_I();
+            default: return error;
+        }
+    }
 
-         switch (c) {
-             case '0', '1': return estado_I();
-             default: return error;
-         }
-     }
-     private int estado_J() {
-         char c = siguienteCaracter();
+    private int estado_I() {
+        char c = siguienteCaracter();
+        switch (c) {
+            case '0':
+            case '1': return estado_I();
+            default: return error;
+        }
+    }
 
-         switch (c) {
-             case '0', '1': return estado_I();
-             case ' ': return aceptado;
-             default: return error;
-         }
-     }
+    private int estado_J() {
+        char c = siguienteCaracter();
+        switch (c) {
+            case '0':
+            case '1': return estado_I();
+            case ' ': return aceptado;
+            default: return error;
+        }
+    }
 }

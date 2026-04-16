@@ -1,51 +1,29 @@
 package fes.aragon.demo1;
 
-import javafx.event.ActionEvent;
+import fes.aragon.demo1.modelo.Lexico;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.stage.FileChooser;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 public class HelloController {
 
     @FXML
-    private Button btnElegir;
+    private TextField inputField;
 
     @FXML
-    private Button btnValidar;
+    private Label resultLabel;
+
+    private Lexico lexico = new Lexico();
 
     @FXML
-    private TextArea txtMostrar;
+    protected void onAnalyzeClick() {
+        String cadena = inputField.getText();
+        boolean valido = lexico.analizar(cadena);
 
-    @FXML
-    private TextArea txtValidar;
-
-    @FXML
-    void elegir(ActionEvent event) {
-        FileChooser fc = new FileChooser();
-        File f = fc.showOpenDialog(null);
-        if (f != null) {
-            try{
-                BufferedReader br = new BufferedReader(new FileReader(f));
-                String linea;
-                txtMostrar.clear();
-                while ((linea = br.readLine()) != null) {
-                    txtMostrar.appendText(linea + "\n");
-                }
-                br.close();
-            } catch (IOException e) {
-                txtMostrar.setText("Error al leer el archivo");
-            }
+        if (valido) {
+            resultLabel.setText("Cadena válida");
+        } else {
+            resultLabel.setText("Cadena inválida");
         }
-    }
-
-    @FXML
-    void validar(ActionEvent event) {
-
     }
 }

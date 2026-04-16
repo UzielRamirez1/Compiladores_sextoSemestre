@@ -1,0 +1,181 @@
+// HelloApplication.java
+package mx.unam;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+public class HelloApplication extends Application {
+    @Override
+    public void start(Stage stage) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 400, 300);
+        stage.setTitle("Analizador Léxico");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch();
+    }
+}
+
+// HelloController.java
+package mx.unam;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+
+public class HelloController {
+
+    @FXML
+    private TextField inputField;
+
+    @FXML
+    private Label resultLabel;
+
+    private Lexico lexico = new Lexico();
+
+    @FXML
+    protected void onAnalyzeClick() {
+        String cadena = inputField.getText();
+        boolean valido = lexico.analizar(cadena);
+
+        if (valido) {
+            resultLabel.setText("Cadena válida");
+        } else {
+            resultLabel.setText("Cadena inválida");
+        }
+    }
+}
+
+// Lexico.java (modelo)
+package mx.unam;
+
+public class Lexico {
+
+    private int indice;
+    private String cadena;
+    private final int error = -1;
+    private final int aceptado = 1;
+
+    public boolean analizar(String cadena) {
+        this.cadena = cadena + " "; // espacio para detectar fin
+        this.indice = 0;
+        int valor = estado_A();
+        return valor == aceptado;
+    }
+
+    private char siguienteCaracter() {
+        if (indice < cadena.length()) {
+            return cadena.charAt(indice++);
+        }
+        return ' ';
+    }
+
+    private int estado_A() {
+        char c = siguienteCaracter();
+        switch (c) {
+            case '0': return estado_B();
+            case '1': return estado_C();
+            default: return error;
+        }
+    }
+
+    private int estado_B() {
+        char c = siguienteCaracter();
+        switch (c) {
+            case '0': return estado_D();
+            case '1': return estado_E();
+            default: return error;
+        }
+    }
+
+    private int estado_C() {
+        char c = siguienteCaracter();
+        switch (c) {
+            case '0': return estado_F();
+            case '1': return estado_G();
+            default: return error;
+        }
+    }
+
+    private int estado_D() {
+        char c = siguienteCaracter();
+        switch (c) {
+            case '0': return estado_D();
+            case '1': return estado_H();
+            default: return error;
+        }
+    }
+
+    private int estado_E() {
+        char c = siguienteCaracter();
+        switch (c) {
+            case '0': return estado_F();
+            case '1': return estado_I();
+            case ' ': return aceptado;
+            default: return error;
+        }
+    }
+
+    private int estado_F() {
+        char c = siguienteCaracter();
+        switch (c) {
+            case '0': return estado_I();
+            case '1': return estado_J();
+            default: return error;
+        }
+    }
+
+    private int estado_G() {
+        char c = siguienteCaracter();
+        switch (c) {
+            case '0': return estado_F();
+            case '1': return estado_G();
+            default: return error;
+        }
+    }
+
+    private int estado_H() {
+        char c = siguienteCaracter();
+        switch (c) {
+            case '0': return estado_F();
+            case '1': return estado_I();
+            default: return error;
+        }
+    }
+
+    private int estado_I() {
+        char c = siguienteCaracter();
+        switch (c) {
+            case '0':
+            case '1': return estado_I();
+            default: return error;
+        }
+    }
+
+    private int estado_J() {
+        char c = siguienteCaracter();
+        switch (c) {
+            case '0':
+            case '1': return estado_I();
+            case ' ': return aceptado;
+            default: return error;
+        }
+    }
+}
+
+// hello-view.fxml
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml" fx:controller="mx.unam.HelloController">
+    <Label text="Analizador Léxico" />
+    <TextField fx:id="inputField" promptText="Ingresa cadena" />
+    <Button text="Analizar" onAction="#onAnalyzeClick" />
+    <Label fx:id="resultLabel" />
+</VBox>
